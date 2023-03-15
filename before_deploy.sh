@@ -47,5 +47,3 @@ sudo ./aws/install
 cp $AWS_CONFIG ~/.aws/config
 
 cp $AWS_CREDENTIALS ~/.aws/credentials
-
-aws configure || true
