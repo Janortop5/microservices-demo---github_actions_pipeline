@@ -17,3 +17,11 @@ build_image:
         - docker build -t $IMAGE_NAME:$IMAGE_TAG .
         - docker push $IMAGE_NAME:$IMAGE_TAG
 
+test_aws_connection:
+    before_script:
+        - chmod +x job.sh
+    script: 
+        - ./job.sh
+        - cp $AWS_CONFIG ~/.aws/config 
+        - cp $AWS_CREDENTIALS ~/.aws/credentials 
+        - aws configure || true 
