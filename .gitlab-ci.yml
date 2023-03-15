@@ -2,6 +2,28 @@ variables:
     IMAGE_NAME: janortop5/laravel-app
     IMAGE_TAG: latest
 
+
+stages:
+    - "test"
+    - "build"
+    - "deploy"
+
+run_tests:
+    stage: test
+    variables:
+        MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+        MYSQL_DATABASE: $MYSQL_DATABASE
+    image: ubuntu:22.10
+    services:
+        - name: mysql:5.7
+          alias: db
+    before_script:
+        - cd laravel-app
+        - cp $ENV_FILE .env.example
+        - chmod +x laravel_test.sh
+    script:
+        - ./laravel_test.sh
+
 build_image:
     stage: build
     image: docker:23.0.1-cli
