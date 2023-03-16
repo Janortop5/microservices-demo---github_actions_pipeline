@@ -35,3 +35,7 @@ kubectl config set-context --current --namespace laravel
 helm install prometheus prometheus-community/kube-prometheus-stack
 
 kubectl apply -f laravel-service-monitor.yml
+
+helm install mysql-exporter prometheus-community/prometheus-mysql-exporter -f values.yml
+
+cd ../microservices-demo/
