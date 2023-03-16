@@ -1,4 +1,6 @@
-sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update && sudo apt-get install -y gnupg software-properties-common wget curl gpg
 
 wget -O- https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
@@ -12,9 +14,9 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
     https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
     sudo tee /etc/apt/sources.list.d/hashicorp.list
 
-sudo apt update
+apt update
 
-sudo apt-get install terraform
+apt-get install terraform
 
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
@@ -22,7 +24,7 @@ curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/b
 
 echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 kubectl version --client
 
