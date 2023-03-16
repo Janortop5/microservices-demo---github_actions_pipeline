@@ -39,6 +39,7 @@ build_image:
         - docker push $IMAGE_NAME:$IMAGE_TAG
 
 deploy_terraform_config_and_manifests:
+    image: ubuntu:22.10
     stage: deploy
     before_script:
         - chmod +x before_deploy.sh
