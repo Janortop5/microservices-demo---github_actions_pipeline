@@ -29,3 +29,9 @@ kubectl exec -n laravel -it $LARAVEL_POD_NAME -- service php8.1-fpm restart
 kubectl exec -n laravel -it $LARAVEL_POD_NAME -- service nginx reload 
 
 kubectl exec -n laravel -it $LARAVEL_POD_NAME -- php artisan migrate --seed 
+
+kubectl config set-context --current --namespace laravel
+
+helm install prometheus prometheus-community/kube-prometheus-stack
+
+kubectl apply -f laravel-service-monitor.yml
