@@ -39,3 +39,5 @@ kubectl apply -f laravel-service-monitor.yml
 helm install mysql-exporter prometheus-community/prometheus-mysql-exporter -f values.yml
 
 cd ../microservices-demo/
+
+kubectl apply -f complete-demo.yml
