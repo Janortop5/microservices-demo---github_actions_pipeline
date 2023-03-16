@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: nginx-monitoring
-  namespace: default
+  namespace: laravel
   labels:
     release: prometheus 
 spec:
@@ -15,4 +15,4 @@ spec:
       port: metrics
   namespaceSelector:
     matchNames:
-      - "default"
+      - "laravel"
