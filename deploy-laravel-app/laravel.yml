@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment 
 metadata:
   name: laravel
-  namespace: default
+  namespace: laravel
   labels:
     app: laravel
 spec:
@@ -47,7 +47,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: laravel-service
-  namespace: default
+  namespace: laravel
   labels:
     app: laravel
 spec:
@@ -64,7 +64,7 @@ apiVersion: v1
 kind: Service 
 metadata:
   name: nginx-exporter-service
-  namespace: default
+  namespace: laravel
   labels: 
     app: nginx-metrics
 spec:
