@@ -38,8 +38,12 @@ kubectl apply -f laravel-service-monitor.yml
 
 helm install mysql-exporter prometheus-community/prometheus-mysql-exporter -f values.yml
 
+kubectl apply -f laravel-ingress.yml
+
 cd ../microservices-demo/
 
 kubectl apply -f complete-demo.yml
 
 kubectl apply -f carts-service-monitor.yml && kubectl apply -f catalogue-service-monitor.yml && kubectl apply -f front-end-service-monitor.yml && kubectl apply -f orders-service-monitor.yml && kubectl apply -f payment-service-monitor.yml && kubectl apply -f queue-master-service-monitor.yml && kubectl apply -f rabbitmq-service-monitor.yml && kubectl apply -f shipping-service-monitor.yml && kubectl apply -f user-service-monitor.yml
+
+kubectl apply -f front-end-ingress.yml
