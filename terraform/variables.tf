@@ -83,6 +83,24 @@ variable "eks_cidr_block" {
   default = ["0.0.0.0/0"]
 }
 
+variable "domain" {
+  type = map(any)
+  default = {
+    domain    = "eaaladejana.live"
+    record-1 = "*.eaaladejana.live"
+    record-2 = "www.eaaladejana.live"
+    type      = "CNAME"
+  }
+}
+
+variable "namedotcom_username" {
+  default = "janortop5"
+}
+
+variable "namedotcom_token" {
+  default = "56e15b07a343ebeadd3eea483ef1e13db6074aa0"
+}
+
 variable "tags" {
   type = map(any)
   default = {
