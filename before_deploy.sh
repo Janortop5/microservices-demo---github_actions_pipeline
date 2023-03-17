@@ -51,3 +51,9 @@ mkdir ~/.aws/
 cp $AWS_CONFIG ~/.aws/config
 
 cp $AWS_CREDENTIALS ~/.aws/credentials
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm repo add stable https://charts.helm.sh/stable
+
+helm repo update
