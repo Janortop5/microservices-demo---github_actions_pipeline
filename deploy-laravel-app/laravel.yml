@@ -53,7 +53,7 @@ metadata:
 spec:
   selector:
     app: laravel
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 80
       targetPort: 80
