@@ -6,7 +6,8 @@
   spec:
     ingressClassName: nginx
     rules:
-       -  http:
+       -  host: sock-shop.eaaladejana.live
+          http:
             paths:
             - backend:
                 service:
