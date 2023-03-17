@@ -40,6 +40,8 @@ helm install mysql-exporter prometheus-community/prometheus-mysql-exporter -f va
 
 kubectl apply -f laravel-ingress.yml
 
+kubectl apply -f prometheus-grafana-ingress.yml
+
 cd ../microservices-demo/
 
 kubectl apply -f complete-demo.yml
