@@ -87,8 +87,7 @@ variable "domain" {
   type = map(any)
   default = {
     domain    = "eaaladejana.live"
-    record-1 = "*.eaaladejana.live"
-    record-2 = "www.eaaladejana.live"
+    record = "*.eaaladejana.live"
     type      = "CNAME"
   }
 }
