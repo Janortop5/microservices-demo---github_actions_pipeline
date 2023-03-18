@@ -8,7 +8,7 @@
 - gitlab account
 
 ### prerequisites for pipeline
-- remote backend for terraform state — a sample file to create s3 backend available in ./terraform/remote
+- remote backend for terraform state — a sample file to create s3 backend available in ./terraform/remote.tf
 - namecheap token
 - create the following variables in gitlab:
 ```
