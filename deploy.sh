@@ -50,8 +50,8 @@ kubectl apply -f carts-service-monitor.yml && kubectl apply -f catalogue-service
 
 kubectl apply -f front-end-ingress.yml
 
-helm install loki grafana/loki-stack --namespace loki --create-namespace --set grafana.enabled=true
+# helm install loki grafana/loki-stack --namespace loki --create-namespace --set grafana.enabled=true
 
-kubectl get secret --namespace loki loki-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+# kubectl get secret --namespace loki loki-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
-kubectl apply -f loki-ingress.yml
+# kubectl apply -f loki-ingress.yml
