@@ -46,7 +46,7 @@ REGISTRY_USER       [variable.type: variable]
   • aws cli 
   • aws-iam-authenticator
   • helm
-  • deploys terraform configuration and kubernetes manifests
+- deploys terraform configuration and kubernetes manifests
 ```
 #### ./terraform
 - creates eks cluster and eks node group in private subnets with only 443 ingress rule
