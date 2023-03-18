@@ -7,3 +7,15 @@ helm repo update
 helm install prometheus prometheus-community/kube-prometheus-stack
 
 helm install mysql-exporter prometheus-community/prometheus-mysql-exporter -f values.yml
+
+helm install \
+  cert-manager jetstack/cert-manager \
+  --set installCRDs=true \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.3.1 \
+  --set webhook.securePort=10260
+
+helm repo add jetstack https://charts.jetstack.io
+
+helm install loki grafana/loki-stack --namespace loki --create-namespace --set grafana.enabled=true --set loki.isDefault=false
