@@ -21,6 +21,7 @@ NAMEDOTCOMTOKEN     [variable.type: variable]
 REGISTRY_PASS       [variable.type: variable]
 REGISTRY_USER       [variable.type: variable]
 ```
+![gitlab variables](./images/gitlab-variables.png)
 - in "./terraform/variables" put namecheap token in var.namedotcom_token — setup of hashicorp vault in pipeline a little complex
 
 ## Breakdown
