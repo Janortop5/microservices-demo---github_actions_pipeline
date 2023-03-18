@@ -27,20 +27,13 @@ REGISTRY_USER       [variable.type: variable]
 ## Breakdown
 #### stage: test
 - tests laravel app files before build, app uses nginx proxy, with nginx set to expose /metrics endpoint
-```
-cd portfolio_image/
-docker build -t janortop5/portfolio .
-```
+![gitlab variables](./images/test-stage.png)
 #### stage: build
 - builds laravel image and pushes to dockerhub account
-```
-docker login
-```
+![gitlab variables](./images/build-stage.png)
 #### stage: deploy
 - deploys cluster with terraform, and deploys laravel app and microservices-demo
-```
-docker push janortop5/portfolio
-```
+![gitlab variables](./images/build-stage.png)
 #### How pipeline works
 - **stage 'test':** creates laravel app along with mysql database as service in Gitlab runner using an ubuntu image, seeds the database and runs "php artisan test"
 
@@ -99,15 +92,19 @@ docker push janortop5/portfolio
 #### ./helm-commands.txt
 - list of some helm commands used in pipeline
 #### laravel and it's endpoint, screenshots
+![gitlab variables](./images/laravel.png)
+![gitlab variables](./images/laravel-endpoint.png)
 #### microservices-demo app screenshots
+
 #### prometheus monitoring and metrics
+![gitlab variables](./images/cpu-usage.png)
+![gitlab variables](./images/memory-usage.png)
+![gitlab variables](./images/service-monitors.png)
 #### loki logging
-```
-kubectl create -f portfolio.yml
-```
-
-### Screenshot of Deployed Website
-
-![portfolilio website](./website-screenshots/screenshot-1.png)
-
-![portfolio website](./website-screenshots/screenshot-2.png)
+![gitlab variables](./images/loki-grafana-laravel.png)
+![gitlab variables](./images/loki-grafana-sock-shop.png)
+#### let's encrypt attempt
+**Another time, I guess**
+![gitlab variables](./images/le-attempt-0.png)
+![gitlab variables](./images/le-attempt-1.png)
+![gitlab variables](./images/le-attempt-2.png)
