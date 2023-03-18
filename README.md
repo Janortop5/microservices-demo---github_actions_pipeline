@@ -27,13 +27,13 @@ REGISTRY_USER       [variable.type: variable]
 ## Breakdown
 #### stage: test
 - tests laravel app files before build, app uses nginx proxy, with nginx set to expose /metrics endpoint
-![gitlab variables](./images/test-stage.png)
+![test stage](./images/test-stage.png)
 #### stage: build
 - builds laravel image and pushes to dockerhub account
-![gitlab variables](./images/build-stage.png)
+![build stage](./images/build-stage.png)
 #### stage: deploy
 - deploys cluster with terraform, and deploys laravel app and microservices-demo
-![gitlab variables](./images/build-stage.png)
+![deploy stage](./images/build-stage.png)
 #### How pipeline works
 - **stage 'test':** creates laravel app along with mysql database as service in Gitlab runner using an ubuntu image, seeds the database and runs "php artisan test"
 
@@ -92,19 +92,19 @@ REGISTRY_USER       [variable.type: variable]
 #### ./helm-commands.txt
 - list of some helm commands used in pipeline
 #### laravel and it's endpoint, screenshots
-![gitlab variables](./images/laravel.png)
-![gitlab variables](./images/laravel-endpoint.png)
+![laravel](./images/laravel.png)
+![laravel endpoint](./images/laravel-endpoint.png)
 #### microservices-demo app screenshots
 
-#### prometheus monitoring and metrics
-![gitlab variables](./images/cpu-usage.png)
-![gitlab variables](./images/memory-usage.png)
-![gitlab variables](./images/service-monitors.png)
+#### prometheus monitoring and metrics and service monitors
+![cpu usage](./images/cpu-usage.png)
+![memory usage](./images/memory-usage.png)
+![service monitors](./images/service-monitors.png)
 #### loki logging
-![gitlab variables](./images/loki-grafana-laravel.png)
-![gitlab variables](./images/loki-grafana-sock-shop.png)
+![loki grafana laravel](./images/loki-grafana-laravel.png)
+![loki grafana sock shop](./images/loki-grafana-sock-shop.png)
 #### let's encrypt attempt
 **Another time, I guess**
-![gitlab variables](./images/le-attempt-0.png)
-![gitlab variables](./images/le-attempt-1.png)
-![gitlab variables](./images/le-attempt-2.png)
+![let's encrypt attempt](./images/le-attempt-0.png)
+![let's encrypt attempt](./images/le-attempt-1.png)
+![let's encrypt attempt](./images/le-attempt-2.png)
