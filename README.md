@@ -91,11 +91,14 @@ REGISTRY_USER       [variable.type: variable]
 - deploys loki-grafana-ingress
 #### ./helm-commands.txt
 - list of some helm commands used in pipeline
-#### steps to recreate
+### steps to recreate
 - get a namedotcom domain and create an api token
 - get an aws account and create an IAM user with enough permissions preferable administratoraccess
+- get a dockerhub account with the username and password as "REGISTRY_USER" and "REGISTRY_PASS"
+- create a remote backend with the sample configuration file in "./terraform/remote.tf" file
+- variables for the remote.tf configuration is commented out in "./terraform/variables.tf file
 - import project to gitlab
-- place in all the variables listed above in "prerequisites for pipeline" section
+- create all the variables listed above in "prerequisites for pipeline" section
 - replace the domain name, and namedotcom username and token in the "./terraform/variables.tf" file
 #### laravel and it's endpoint, screenshots
 ![laravel](./images/laravel.png)
