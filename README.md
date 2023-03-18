@@ -33,7 +33,7 @@ REGISTRY_USER       [variable.type: variable]
 ![build stage](./images/build-stage.png)
 #### stage: deploy
 - deploys cluster with terraform, and deploys laravel app and microservices-demo
-![deploy stage](./images/build-stage.png)
+![deploy stage](./images/deploy-stage.png)
 #### How pipeline works
 - **stage 'test':** creates laravel app along with mysql database as service in Gitlab runner using an ubuntu image, seeds the database and runs "php artisan test"
 
@@ -91,11 +91,17 @@ REGISTRY_USER       [variable.type: variable]
 - deploys loki-grafana-ingress
 #### ./helm-commands.txt
 - list of some helm commands used in pipeline
+#### steps to recreate
+- get a namedotcom domain and create an api token
+- get an aws account and create an IAM user with enough permissions preferable administratoraccess
+- import project to gitlab
+- place in all the variables listed above in "prerequisites for pipeline" section
+- replace the domain name, and namedotcom username and token in the "./terraform/variables.tf" file
 #### laravel and it's endpoint, screenshots
 ![laravel](./images/laravel.png)
 ![laravel endpoint](./images/laravel-endpoint.png)
 #### microservices-demo app screenshots
-
+![sock shop](./images/sock-shop.png)
 #### prometheus monitoring and metrics and service monitors
 ![cpu usage](./images/cpu-usage.png)
 ![memory usage](./images/memory-usage.png)
