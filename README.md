@@ -2,14 +2,14 @@
 
 ### prerequisites for project
 - aws account
-- iam user with administrative access
+- iam user with administrator access
 - domain
 - dockerhub account
 - gitlab account
 
 ### prerequisites for pipeline
 - remote backend for terraform state — a sample file to create s3 backend available in ./terraform/remote.tf
-- namecheap token
+- namedotcom token
 - create the following variables in gitlab:
 ```
 AWS_CONFIG          [variable.type: file]
