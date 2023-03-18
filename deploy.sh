@@ -16,7 +16,7 @@ cd ../deploy-laravel-app/
 
 kubectl apply -f laravel-namespace.yml && kubectl apply -f laravel.yml && kubectl apply -f mysql-secret.yml && kubectl apply -f mysql.yml
 
-sleep 30
+sleep 60
 
 kubectl get pods --no-headers -o custom-columns=":metadata.name" -n laravel| grep laravel | xargs echo > laravel-pod-name
 
