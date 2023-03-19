@@ -112,8 +112,7 @@ REGISTRY_USER       [variable.type: variable]
 #### loki logging
 ![loki grafana laravel](./images/loki-grafana-laravel.png)
 ![loki grafana sock shop](./images/loki-grafana-sock-shop.png)
-#### let's encrypt attempt
-**Another time, I guess**
-![let's encrypt attempt](./images/le-attempt-0.png)
-![let's encrypt attempt](./images/le-attempt-1.png)
-![let's encrypt attempt](./images/le-attempt-2.png)
+#### let's encrypt
+![laravel](./images/laravel.png)
+![laravel endpoint](./images/laravel-endpoint.png)
+![sock shop](./images/sock-shop.png)
