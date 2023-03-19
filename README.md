@@ -102,6 +102,7 @@ REGISTRY_USER       [variable.type: variable]
 - create all the variables listed above in "prerequisites for pipeline" section
 - place the same mysql database and password added in the ENV_FILE variable in ./deploy-laravel-app/mysql-secret.yml
 - replace the domain name, and namedotcom username and token in the "./terraform/variables.tf" file
+- run pipeline
 #### steps to recreate let's encrypt
 - use the commands provided in ./lets-encrypt/helm-commands.txt to set up cert manager
 - place in your aws secret key in ./lets-encrypt/route53-secret.yml and create route53 secret for ClusterIssuer
