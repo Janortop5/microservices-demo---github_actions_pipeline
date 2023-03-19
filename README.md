@@ -22,6 +22,7 @@ REGISTRY_PASS       [variable.type: variable]
 REGISTRY_USER       [variable.type: variable]
 ```
 ![gitlab variables](./images/gitlab-variables.png)
+- the same mysql database and password used in the env file will be used for the ./deploy-laravel-app/mysql-secret.yml
 - in "./terraform/variables" put namedotcom token in var.namedotcom_token — setup of hashicorp vault in pipeline a little complex
 
 ## Breakdown
@@ -68,7 +69,7 @@ REGISTRY_USER       [variable.type: variable]
 - front-end-ingress
 - loki-ingress
 #### ./lets-encrypt
-- files for my let's-encrypt attempt
+- files for let's encrypt
 #### ./laravel
 - laravel app files
 #### ./images
@@ -99,7 +100,19 @@ REGISTRY_USER       [variable.type: variable]
 - variables for the remote.tf configuration is commented out in "./terraform/variables.tf file
 - import project to gitlab
 - create all the variables listed above in "prerequisites for pipeline" section
+- place the same mysql database and password added in the ENV_FILE variable in ./deploy-laravel-app/mysql-secret.yml
 - replace the domain name, and namedotcom username and token in the "./terraform/variables.tf" file
+#### steps to recreate let's encrypt
+- use the commands provided in ./lets-encrypt/helm-commands.txt to set up cert manager
+- place in your aws secret key in ./lets-encrypt/route53-secret.yml and create route53 secret for ClusterIssuer
+- create the route53 secret in the namespaces needed — laravel and sock-shop
+- apply ./lets-encrypt/laravel-ingress.yml to create laravel ingress with tls
+- apply ./lets-encrypt/sock-shop-ingress.yml to create sock shop ingress with tls
+- apply ./lets-encrypt/laravel-ingress-update-prod.yml to request let's encrypt certificate for laravel
+- apply ./lets-encrypt/sock-shop-ingress-update-prod.yml to request let's encrypt certificate for laravel
+- check to see both certificate have been issued with commands:
+- kubectl get certificate -n laravel
+- kubectl get certificate -n sock-shop
 #### laravel and it's endpoint, screenshots
 ![laravel](./images/laravel.png)
 ![laravel endpoint](./images/laravel-endpoint.png)
