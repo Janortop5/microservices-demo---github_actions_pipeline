@@ -106,7 +106,7 @@ REGISTRY_USER       [variable.type: variable]
 #### steps to recreate let's encrypt
 - use the commands provided in ./lets-encrypt/helm-commands.txt to set up cert manager
 - place in your aws secret key in ./lets-encrypt/route53-secret.yml and create route53 secret for ClusterIssuer
-- create the route53 secret in the namespaces needed — laravel and sock-shop
+- create the route53 secret in the cert-manager namespace or whatever namespace your cert manager is in.
 - apply ./lets-encrypt/laravel-ingress.yml to create laravel ingress with tls
 - apply ./lets-encrypt/sock-shop-ingress.yml to create sock shop ingress with tls
 - apply ./lets-encrypt/laravel-ingress-update-prod.yml to request let's encrypt certificate for laravel
