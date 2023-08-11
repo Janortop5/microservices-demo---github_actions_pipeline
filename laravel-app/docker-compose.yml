@@ -18,6 +18,8 @@ services:
   #MySQL db for laravel
   db:
     image: mysql
+    env_file:
+      - .env
     container_name: db
     restart: unless-stopped
     volumes: 
