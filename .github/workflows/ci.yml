@@ -11,7 +11,7 @@ env:
   repository: 'laravel'
   image_tag: 'v1'
   registry: 'docker.io'
-  dockerfile: 'Dockerfile'
+  dockerfile: 'laravel-app/Dockerfile'
 
 jobs:
   build:
@@ -27,6 +27,8 @@ jobs:
       run: |
         cd laravel-app/
         echo ${{ secrets.ENV_FILE }} > .env.example
+        ls
+        cat .env.example
       
     - uses: mr-smithers-excellent/docker-build-push@v6
       name: Build & push Docker image
