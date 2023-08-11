@@ -19,7 +19,7 @@ services:
   db:
     image: mysql
     env_file:
-      - laravel-app/.env
+      - /home/runner/work/microservices-demo---github_actions_pipeline/microservices-demo---github_actions_pipeline/laravel-app/.env
     container_name: db
     restart: unless-stopped
     volumes: 
