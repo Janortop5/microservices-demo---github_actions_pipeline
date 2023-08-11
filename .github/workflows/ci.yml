@@ -39,5 +39,7 @@ jobs:
         image: $namespace/$repository
         tags: $image_tag, latest
         registry: $registry
+        dockerfile: laravel-app/Dockerfile
+        directory: laravel-app/
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
