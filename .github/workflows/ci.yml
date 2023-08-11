@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Test Deploy Laravel
 
 on:
   push:
@@ -49,14 +49,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3 
-    
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: '5.7'
-          mysql database: 'laravel'
-          mysql root password: ${{ secrets.RootPassword }}
       
-      - name: Copy test env file
+      - name: Test Laravel App
         run: |
           cd laravel-app/
           echo ${{ secrets.TEST_ENV_FILE }} > .env.example
