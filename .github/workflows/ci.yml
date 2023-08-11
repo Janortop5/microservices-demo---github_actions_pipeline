@@ -49,7 +49,7 @@ jobs:
         run: |
           cd laravel-app/
           echo ${{ secrets.TEST_ENV_FILE }} > .env.example
-          cp .env.example ../.env          
+          cp .env.example .env          
       
       - name: Test Laravel App
         run: |
