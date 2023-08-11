@@ -43,3 +43,21 @@ jobs:
         directory: laravel-app/
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        
+  laravel_test:
+    runs-on: ubuntu:22.10
+    
+    steps:
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: '5.7'
+          mysql database: 'laravel'
+          mysql root password: ${{ secrets.RootPassword }}
+      
+      - name: Copy test env file
+        run: |
+          cd laravel-app/
+          echo ${{ secrets.TEST_ENV_FILE }} > .env.example
+          chmod +x laravel_test.sh
+          ./laravel_test.sh
+          
