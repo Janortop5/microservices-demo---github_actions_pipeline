@@ -27,12 +27,7 @@ jobs:
       run: |
         cd laravel-app/
         echo ${{ secrets.ENV_FILE }} > .env.example
-        ls -al
-        cat .env.example
-      
-    - name: test
-      run: ls -al
-      
+
     - uses: mr-smithers-excellent/docker-build-push@v6
       name: Build & push Docker image
       with:
@@ -50,12 +45,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3 
       
-      - name: Test Laravel App
+      - name: Copy env file
         run: |
           cd laravel-app/
           echo ${{ secrets.TEST_ENV_FILE }} > .env.example
-          cp .env.example .env
+          touch .env
+          cp .env.example .env          
+      
+      - name: Test Laravel App
+        run: |
+          cd laravel-app/
+          ls -al
           docker compose up -d
-          docker compose exec laravel php artisan migrate --seed
+          ls -al
+          docker compose exec laravel php artisan migrate --seed -yes
           docker compose exec laravel php artisan test
           
