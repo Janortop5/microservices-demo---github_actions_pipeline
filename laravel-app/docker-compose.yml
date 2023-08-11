@@ -25,8 +25,8 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: "${DB_DATABASE}"
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     networks:
       - ocelot
 
