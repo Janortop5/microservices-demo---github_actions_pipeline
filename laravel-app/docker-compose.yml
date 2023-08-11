@@ -32,13 +32,13 @@ services:
 
 #Volumes
 volumes:
-  apache_logs:
+  nginx_logs:
     driver: local
   mysql-data:
     driver: local
   laravel-src:
     driver: local
-  apache2-sites:
+  nginx-sites:
     driver: local
 
 #Network
