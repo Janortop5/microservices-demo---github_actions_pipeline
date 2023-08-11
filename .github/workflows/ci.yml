@@ -57,6 +57,3 @@ jobs:
           docker compose up -d
           docker compose exec laravel php artisan migrate --seed --env=development
           docker compose exec laravel php artisan test --env=development
-        env:
-          .env: ${{ secrets.TEST_ENV_FILE }}
-          
