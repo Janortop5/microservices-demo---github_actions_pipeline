@@ -9,28 +9,31 @@ on:
 env:
   namespace: 'janortop5'
   repository: 'laravel'
+  image_tag: 'v1'
+  registry: 'docker.io'
+  dockerfile: 'Dockerfile'
 
 jobs:
-
   build:
-
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ubuntu-latest # ${{matrix.os}}
+#     strategy:
+#       matrix:
+#         os: [ubuntu-latest, windows-latest, macOS-latest]
         
     steps:
     - uses: actions/checkout@v3    
     
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Set up Image build
+      run: |
+        cd laravel-app/
+        cp ${{ secrets.ENV_FILE }} .env.example
       
     - uses: mr-smithers-excellent/docker-build-push@v6
       name: Build & push Docker image
       with:
-        image: ${{ namespace }}/${{ repository }}
-        tags: v1, latest
-        registry: registry-url.io
-        dockerfile: Dockerfile.ci
+        image: $namespace/$repository
+        tags: $image_tag, latest
+        registry: $registry
+        dockerfile: $dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
