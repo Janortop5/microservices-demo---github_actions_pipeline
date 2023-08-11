@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  #laravel app
+  laravel:
+    build: .
+    container_name: laravel
+    restart: unless-stopped
+    volumes:
+      - nginx_logs:/var/log/nginx/
+      - nginx-sites:/etc/nginx/sites-available/
+      - laravel-src:/var/www/html/laravel-realworld-example-app
+    ports:
+      - "8080:80"
+    networks:
+      - ocelot
+
+  #MySQL db for laravel
+  db:
+    image: mysql
+    container_name: db
+    restart: unless-stopped
+    volumes: 
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+    networks:
+      - ocelot
+
+#Volumes
+volumes:
+  apache_logs:
+    driver: local
+  mysql-data:
+    driver: local
+  laravel-src:
+    driver: local
+  apache2-sites:
+    driver: local
+
+#Network
+networks:
+  ocelot:
+    driver: bridge
