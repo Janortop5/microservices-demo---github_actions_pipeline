@@ -60,6 +60,7 @@ jobs:
         run: |
           cd laravel-app/
           echo ${{ secrets.TEST_ENV_FILE }} > .env.example
-          chmod +x laravel_test.sh
-          ./laravel_test.sh
+          docker compose up -d
+          docker compose exec laravel php artisan migrate --seed
+          docker compose exec laravel php artisan test
           
