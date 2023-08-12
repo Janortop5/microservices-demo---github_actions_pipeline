@@ -52,6 +52,9 @@ jobs:
       - name: Test Laravel
         run: |
           cd 'laravel-app'
+          echo ${{ secrets.SSH_KEY }} > testing.pem
+          chmod 400 testing.pem
+
 
 
   
