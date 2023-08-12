@@ -30,7 +30,7 @@ jobs:
     - name: Set up Image build
       run: |
         cd laravel-app/
-        echo ${{ secrets.ENV_FILE }} > .env.example
+        echo "${{ secrets.ENV_FILE }}" > .env.example
 
     - uses: mr-smithers-excellent/docker-build-push@v6
       name: Build & push Docker image
