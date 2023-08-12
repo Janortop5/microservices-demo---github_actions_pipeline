@@ -1,0 +1,99 @@
+name: Build Test Deploy Laravel
+
+on:
+  pull_request:
+    types:
+      - closed
+  push:
+    branches: [ "main" ]
+
+env:
+  namespace: 'janortop5'
+  repository: 'laravel'
+  image_tag: 'v1'
+  registry: 'docker.io'
+  DB_DATABASE: ${{ secrets.DB_DATABASE }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  server_user: 'root'
+  server_ip: '64.226.66.96'
+  prod_server_ip: '157.230.120.13'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # ${{matrix.os}}
+#     strategy:
+#       matrix:
+#         os: [ubuntu-latest, windows-latest, macOS-latest]
+        
+    steps:
+    - uses: actions/checkout@v3    
+    
+    - name: Set up Image build
+      run: |
+        cd laravel-app/
+        echo '${{ secrets.ENV_FILE }}' > .env.example
+        cat .env.example
+
+    - uses: mr-smithers-excellent/docker-build-push@v6
+      name: Build & push Docker image
+      with:
+        image: $namespace/$repository
+        tags: $image_tag, latest
+        registry: $registry
+        dockerfile: laravel-app/Dockerfile
+        directory: laravel-app/
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+  laravel_test:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - uses: actions/checkout@v3 
+      
+      - name: Test Laravel
+        run: |
+          cd 'laravel-app'
+          echo "${{ secrets.STAGING_KEY }}" > testing.pem
+          echo '${{ secrets.ENV_FILE }}' > .env.example
+          cp .env.example .env
+          echo "namespace=$namespace" >> .env 
+          echo "repository=$repository" >> .env 
+          chmod 400 testing.pem
+          scp -o StrictHostKeyChecking=no -i testing.pem docker-compose.yml $server_user@$server_ip:~
+          scp -o StrictHostKeyChecking=no -i testing.pem .env $server_user@$server_ip:~
+          ssh -o StrictHostKeyChecking=no -i testing.pem $server_user@$server_ip "
+          docker ps -aq | xargs docker stop || true | xargs docker rm || true &&
+          docker compose up -d --pull always && sleep 35 && 
+          docker exec laravel php artisan migrate --seed --env=development && 
+          docker exec laravel php artisan test --env=development
+          "
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: laravel_test
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy to Production
+        run: |
+          cd 'laravel-app'
+          echo "${{ secrets.PROD_KEY }}" > prod.pem
+          echo '${{ secrets.ENV_FILE }}' > .env.example
+          cp .env.example .env
+          echo "namespace=$namespace" >> .env 
+          echo "repository=$repository" >> .env 
+          chmod 400 prod.pem
+          scp -o StrictHostKeyChecking=no -i prod.pem docker-compose.yml $server_user@$prod_server_ip:~
+          scp -o StrictHostKeyChecking=no -i prod.pem .env $server_user@$prod_server_ip:~
+          ssh -o StrictHostKeyChecking=no -i prod.pem $server_user@$prod_server_ip "
+          docker ps -aq | xargs docker stop || true | xargs docker rm || true &&
+          docker compose up -d --pull always
+          "
+          
+
+
+
+  

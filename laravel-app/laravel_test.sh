@@ -1,7 +1,9 @@
 export DEBIAN_FRONTEND=noninteractive
 
+sudo su -
+
 apt update \
-    && apt install nginx wget lsb-release software-properties-common -y
+    && sudo apt install nginx wget lsb-release software-properties-common -y
 
 cp -r ./laravel-realworld-example-app /var/www/html/laravel-realworld-example-app
 
