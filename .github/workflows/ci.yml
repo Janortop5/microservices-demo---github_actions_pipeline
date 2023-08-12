@@ -52,6 +52,7 @@ jobs:
       - name: Test Laravel
         run: |
           cd 'laravel-app'
+          echo ${{ secrets.SSH_KEY }} > .env.example
           chmod 400 testing.pem
           scp -i testing.pem docker-compose.yml $server_user@$server_ip:~
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} $server_user@$server_ip "
