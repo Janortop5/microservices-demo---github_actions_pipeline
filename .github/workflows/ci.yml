@@ -30,7 +30,7 @@ jobs:
     - name: Set up Image build
       run: |
         cd laravel-app/
-        echo "${{ secrets.ENV_FILE }}" > .env.example
+        echo '${{ secrets.ENV_FILE }}' > .env.example
         cat .env.example
 
     - uses: mr-smithers-excellent/docker-build-push@v6
@@ -54,7 +54,7 @@ jobs:
         run: |
           cd 'laravel-app'
           echo "${{ secrets.STAGING_KEY }}" > testing.pem
-          echo "${{ secrets.ENV_FILE }}" > .env.example
+          echo '${{ secrets.ENV_FILE }}' > .env.example
           cp .env.example .env
           echo "namespace=$namespace" >> .env 
           echo "repository=$repository" >> .env 
