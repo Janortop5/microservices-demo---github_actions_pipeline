@@ -11,8 +11,8 @@ env:
   repository: 'laravel'
   image_tag: 'v1'
   registry: 'docker.io'
-  DB_DATABASE: 'laravel'
-  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}}}
+  DB_DATABASE: ${{ secrets.DB_DATABASE}}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   server_user: 'root'
   server_ip: '64.226.66.96'
   branch: 'new-ci-workflow'
@@ -51,6 +51,17 @@ jobs:
       
       - name: Test Laravel
         run: |
-          echo "You are hell"
+          cd 'laravel-app'
+          echo ${{ secrets.SSH_KEY }} > testing.pem
+          chmod 400 testing.pem
+          scp -i testing.pem docker-compose.yml $server_user@$server_ip:~
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} $server_user@$server_ip "
+          export namespace=$namespace && export repository=$repository && 
+          export DB_PASSWORD=${{ secrets.DB_PASSWORD }} && export DB_DATABASE=${{ secrets.DB_DATABASE }} &&
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} &&
+          docker ps -aq | xargs docker stop || true | xargs docker rm || true &&
+          docker compose up -d && sleep 40 && docker exec laravel php artisan migrate --seed --env=development
+          && docker exec laravel php artisan test --env=development
+          "
 
   
