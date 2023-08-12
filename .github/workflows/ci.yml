@@ -65,36 +65,3 @@ jobs:
           # && docker exec laravel php artisan test --env=development
           # "
   
-  # laravel_test:
-  #   runs-on: ubuntu-latest
-    
-  #   steps:
-  #     - uses: actions/checkout@v3 
-      
-  #     - name: Copy env file
-  #       run: |
-  #         cd laravel-app
-  #         echo ${{ secrets.TEST_ENV_FILE }} > .env.example
-  #         chmod +x laravel_test.sh
-  #         ./laravel_test.sh
-    
-  # laravel_test:
-  #   runs-on: ubuntu-latest
-    
-  #   steps:
-  #     - uses: actions/checkout@v3 
-      
-  #     - name: Copy env file
-  #       run: |
-  #         cd laravel-app/
-  #         echo ${{ secrets.TEST_ENV_FILE }} > .env.example   
-      
-  #     - name: Test Laravel App
-  #       run: |
-  #         cd laravel-app/
-  #         # export DB_PASSWORD=${{ secrets.DB_PASSWORD }}}}
-  #         # export DB_DATABASE=${{ secrets.DB_DATABASE }}}}
-  #         docker compose up -d
-  #         sleep 160
-  #         docker exec laravel php artisan migrate --seed --env=development
-  #         docker exec laravel php artisan test --env=development
