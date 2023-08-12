@@ -11,7 +11,7 @@ env:
   repository: 'laravel'
   image_tag: 'v1'
   registry: 'docker.io'
-  DB_DATABASE: ${{ secrets.DB_DATABASE }}}}
+  DB_DATABASE: 'laravel'
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}}}
   server_user: 'root'
   server_ip: '64.226.66.96'
@@ -57,7 +57,7 @@ jobs:
           scp -i testing.pem docker-compose.yml $server_user@$server_ip:~
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} $server_user@$server_ip "
           export namespace=$namespace && export repository=$repository && 
-          export DB_PASSWORD=${{ secrets.DB_PASSWORD }} && export DB_DATABASE=${{ secrets.DB_DATABASE }} &&
+          export DB_PASSWORD=${{ secrets.DB_PASSWORD }} && export DB_DATABASE=$DB_DATABASE &&
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} &&
           docker ps -aq | xargs docker stop || true | xargs docker rm || true &&
           docker compose up -d && sleep 40 && docker exec laravel php artisan migrate --seed --env=development
