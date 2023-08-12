@@ -54,7 +54,7 @@ jobs:
           cd laravel-app
           echo ${{ secrets.SSH_KEY }} > testing.pem
           chmod 400 testing.pem
-          scp -i testing.pem myfile.txt user@host:~
+          scp -i testing.pem docker-compose.yml $server_user@$server_ip:~
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} $server_user@$server_ip "
           export namespace=$namespace && export repository=$repository && 
           export DB_PASSWORD=${{ secrets.DB_PASSWORD }} && export DB_DATABASE=${{ secrets.DB_DATABASE }} &&
