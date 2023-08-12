@@ -51,7 +51,11 @@ jobs:
       
       - name: Test Laravel
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }}}} $server_user@$server_ip "
+          cd laravel-app
+          echo ${{ secrets.SSH_KEY }} > testing.pem
+          chmod 400 testing.pem
+          scp -i testing.pem myfile.txt user@host:~
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} $server_user@$server_ip "
           export namespace=$namespace && export repository=$repository && 
           export DB_PASSWORD=${{ secrets.DB_PASSWORD }} && export DB_DATABASE=${{ secrets.DB_DATABASE }} &&
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} &&
