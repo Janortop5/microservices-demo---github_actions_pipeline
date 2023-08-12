@@ -7,6 +7,8 @@ sudo cp -r ./laravel-realworld-example-app /var/www/html/laravel-realworld-examp
 
 sudo cp ./.env.example /var/www/html/laravel-realworld-example-app/.env
 
+sudo su -
+
 apt install apt-transport-https gnupg2 ca-certificates -y
 
 apt install php8.1-fpm libapache2-mod-php php php-common php-xml php-gd php8.1-opcache php-mbstring php-tokenizer \
