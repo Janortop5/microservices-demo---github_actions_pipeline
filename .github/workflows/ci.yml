@@ -42,6 +42,19 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         
+  laravel_test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3 
+      
+      - name: Copy env file
+        run: |
+          cd laravel-app
+          echo ${{ secrets.TEST_ENV_FILE }} > .env.example
+          chmod +x laravel_test.sh
+          ./laravel_test.sh
+    
   # laravel_test:
   #   runs-on: ubuntu-latest
     
@@ -57,27 +70,9 @@ jobs:
   #     - name: Test Laravel App
   #       run: |
   #         cd laravel-app/
+  #         # export DB_PASSWORD=${{ secrets.DB_PASSWORD }}}}
+  #         # export DB_DATABASE=${{ secrets.DB_DATABASE }}}}
   #         docker compose up -d
-  #         docker compose exec laravel php artisan migrate --seed --env=development
-  #         docker compose exec laravel php artisan test --env=development
-  laravel_test:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v3 
-      
-      - name: Copy env file
-        run: |
-          cd laravel-app/
-          echo ${{ secrets.TEST_ENV_FILE }} > .env.example
-          cp .env.example .env          
-      
-      - name: Test Laravel App
-        run: |
-          cd laravel-app/
-          # export DB_PASSWORD=${{ secrets.DB_PASSWORD }}}}
-          # export DB_DATABASE=${{ secrets.DB_DATABASE }}}}
-          docker compose up -d
-          sleep 80
-          docker exec laravel php artisan migrate --seed --env=development
-          docker exec laravel php artisan test --env=development
+  #         sleep 80
+  #         docker exec laravel php artisan migrate --seed --env=development
+  #         docker exec laravel php artisan test --env=development
