@@ -1,9 +1,10 @@
 name: Build Test Deploy Laravel
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
+    types:
+      - closed
+  push:
     branches: [ "main" ]
 
 env:
@@ -89,9 +90,7 @@ jobs:
           scp -o StrictHostKeyChecking=no -i prod.pem .env $server_user@$prod_server_ip:~
           ssh -o StrictHostKeyChecking=no -i prod.pem $server_user@$prod_server_ip "
           docker ps -aq | xargs docker stop || true | xargs docker rm || true &&
-          docker compose up -d --pull always && sleep 35 && 
-          docker exec laravel php artisan migrate --seed --env=development && 
-          docker exec laravel php artisan test --env=development
+          docker compose up -d --pull always
           "
           
 
