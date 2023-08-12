@@ -3,7 +3,7 @@ version: '3'
 services:
   #laravel app
   laravel:
-    build: .
+    image: "${$namespace/$repository}"
     container_name: laravel
     restart: unless-stopped
     volumes:
