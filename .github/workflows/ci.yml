@@ -60,6 +60,7 @@ jobs:
           chmod 400 testing.pem
           scp -o StrictHostKeyChecking=no -i testing.pem docker-compose.yml $server_user@$server_ip:~
           scp -o StrictHostKeyChecking=no -i testing.pem .env $server_user@$server_ip:~
+          scp -o StrictHostKeyChecking=no -i testing.pem .env.example $server_user@$server_ip:~
           ssh -o StrictHostKeyChecking=no -i testing.pem $server_user@$server_ip "
           docker ps -aq | xargs docker stop || true | xargs docker rm || true &&
           docker compose up -d && sleep 40 && docker exec laravel php artisan migrate --seed --env=development
