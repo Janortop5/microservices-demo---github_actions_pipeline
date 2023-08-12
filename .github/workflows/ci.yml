@@ -11,8 +11,8 @@ env:
   repository: 'laravel'
   image_tag: 'v1'
   registry: 'docker.io'
-  DB_DATABASE: ${{ secrets.DB_DATABASE }}}}
-  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}}}
+  # DB_DATABASE: ${{ secrets.DB_DATABASE }}}}
+  # DB_PASSWORD: ${{ secrets.DB_PASSWORD }}}}
 #   dockerfile: 'laravel-app/Dockerfile'
 
 jobs:
@@ -74,9 +74,9 @@ jobs:
       - name: Test Laravel App
         run: |
           cd laravel-app/
-          # export DB_PASSWORD=${{ secrets.DB_PASSWORD }}}}
-          # export DB_DATABASE=${{ secrets.DB_DATABASE }}}}
+          export DB_PASSWORD=${{ secrets.DB_PASSWORD }}}}
+          export DB_DATABASE=${{ secrets.DB_DATABASE }}}}
           docker compose up -d
-          sleep 40
+          sleep 80
           docker compose exec laravel php artisan migrate --seed --env=development
           docker compose exec laravel php artisan test --env=development
