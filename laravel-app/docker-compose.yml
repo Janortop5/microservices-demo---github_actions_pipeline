@@ -6,10 +6,10 @@ services:
     image: "${namespace}/${repository}"
     container_name: laravel
     restart: unless-stopped
-    volumes:
-      - nginx_logs:/var/log/nginx/
-      - nginx-sites:/etc/nginx/sites-available/
-      - laravel-src:/var/www/html/laravel-realworld-example-app
+    # volumes:
+    #   - nginx_logs:/var/log/nginx/
+    #   - nginx-sites:/etc/nginx/sites-available/
+    #   - laravel-src:/var/www/html/laravel-realworld-example-app
     ports:
       - "8080:80"
     networks:
