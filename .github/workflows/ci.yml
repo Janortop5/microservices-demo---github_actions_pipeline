@@ -2,8 +2,7 @@ name: Build Test Deploy Laravel
 
 on:
   pull_request:
-    types:
-      - closed
+    branches: [ "main" ]
   push:
     branches: [ "main" ]
 
