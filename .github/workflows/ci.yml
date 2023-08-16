@@ -2,8 +2,7 @@ name: Build Test Deploy Laravel
 
 on:
   pull_request:
-    types:
-      - closed
+    branches: [ "main" ]
   push:
     branches: [ "main" ]
 
@@ -15,8 +14,8 @@ env:
   DB_DATABASE: ${{ secrets.DB_DATABASE }}
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   server_user: 'root'
-  server_ip: '64.226.66.96'
-  prod_server_ip: '157.230.120.13'
+  server_ip: '164.92.251.207'
+  prod_server_ip: '165.22.64.30'
 
 jobs:
   build:
@@ -46,7 +45,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         
   laravel_test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: build
     
     steps:
@@ -71,7 +70,7 @@ jobs:
           "
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: laravel_test
 
     steps:
